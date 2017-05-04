@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 136364123664807812}
   - component: {fileID: 23607832900949862}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: LeftBicep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 135206496571418072}
   - component: {fileID: 23174138042509062}
   m_Layer: 0
-  m_Name: Neck
+  m_Name: LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 198679072622077280}
   - component: {fileID: 199995768366817062}
   m_Layer: 0
-  m_Name: Fx_OilTrailHIGH_Root (1)
+  m_Name: LeftFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 136578431008453786}
   - component: {fileID: 23416255322271826}
   m_Layer: 0
-  m_Name: Capsule (1)
+  m_Name: RightBicep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 135770619205906452}
   - component: {fileID: 23377133511640940}
   m_Layer: 0
-  m_Name: LeftShoulder
+  m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 136679751312568622}
   - component: {fileID: 23975671598532280}
   m_Layer: 0
-  m_Name: OuterEye (1)
+  m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 136573228470924142}
   - component: {fileID: 23327692500139786}
   m_Layer: 0
-  m_Name: Capsule (2)
+  m_Name: RightForearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 135596276966772796}
   - component: {fileID: 23403561588642140}
   m_Layer: 0
-  m_Name: Neck (3)
+  m_Name: LeftElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 136889139270127528}
   - component: {fileID: 23695921439812640}
   m_Layer: 0
-  m_Name: Capsule (5)
+  m_Name: RightTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 23364205790943250}
   - component: {fileID: 95310847573990122}
   m_Layer: 0
-  m_Name: enemyHead (1)
+  m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 135304831737991818}
   - component: {fileID: 23035614764004572}
   m_Layer: 0
-  m_Name: Neck (2)
+  m_Name: RightElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 136468800503033856}
   - component: {fileID: 23309955196764442}
   m_Layer: 0
-  m_Name: Capsule (6)
+  m_Name: LeftTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 136152349020786512}
   - component: {fileID: 23512783157620136}
   m_Layer: 0
-  m_Name: OuterEye (3)
+  m_Name: PowerSourceCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 136392528768114182}
   - component: {fileID: 23229099943354910}
   m_Layer: 0
-  m_Name: Capsule (3)
+  m_Name: LeftForearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 198933930588404472}
   - component: {fileID: 199369551775284804}
   m_Layer: 0
-  m_Name: Fx_OilTrailHIGH_Root
+  m_Name: RightFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 136270045013663538}
   - component: {fileID: 23721346962096986}
   m_Layer: 0
-  m_Name: Cylinder (1)
+  m_Name: LeftExhaust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 136120737906774834}
   - component: {fileID: 23653255201445780}
   m_Layer: 0
-  m_Name: OuterEye (2)
+  m_Name: OuterPowerSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4941874319283042}
   m_Layer: 0
-  m_Name: Enemy_Model
+  m_Name: Training_Bot_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 23273509624779522}
   - component: {fileID: 95278306714019374}
   m_Layer: 0
-  m_Name: enemyHead
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 136404785266854064}
   - component: {fileID: 23600495420525722}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: RightExhaust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,7 +669,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1926117455413236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 13.483, y: 15.559, z: 2.429}
   m_LocalScale: {x: 1.7669176, y: 1.2398082, z: 1.2398082}
   m_Children:
   - {fileID: 4728579637644268}
@@ -1755,7 +1755,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -89581543
+  randomSeed: -1943548004
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4711,7 +4711,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1016475142
+  randomSeed: -79370478
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 19817552}
   - component: {fileID: 19908194}
   m_Layer: 0
-  m_Name: Fx_OilTrailHIGH_Root
+  m_Name: Blue_Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

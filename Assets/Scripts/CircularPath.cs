@@ -6,8 +6,12 @@ Project: The1v1Game
 using UnityEngine;
 
 public class CircularPath : MonoBehaviour {
+    public static CircularPath instance; //Singleton design pattern
     [SerializeField]
     private CircularPathNode[] nodes;
+    public CircularPathNode[] Nodes {
+        get { return nodes; }
+    }
 
     /// <summary>
     /// This method will create the circular path formed by the nodes placed in the scene, assigning to each their previous and next nodes.
@@ -31,5 +35,7 @@ public class CircularPath : MonoBehaviour {
 
     void Start() {
         CreateCircularPath();
+        if (instance == null)
+            instance = this;
     }
 }

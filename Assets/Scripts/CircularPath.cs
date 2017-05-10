@@ -17,22 +17,25 @@ public class CircularPath : MonoBehaviour {
     /// This method will create the circular path formed by the nodes placed in the scene, assigning to each their previous and next nodes.
     /// </summary>
     void CreateCircularPath() {
-        for (int i = 0; i < 10; i++) {
-            if (i == 0) {
+        for (int i = 0; i < nodes.Length; i++) {
+            if (i == 0) { //Special case i = 0, first node
                 nodes[i].Next = nodes[i + 1];
                 nodes[i].Previous = nodes[9];
             }
-            else if(i == 9) {
+            else if(i == nodes.Length - 1) { //Special case i = last node
                 nodes[i].Next = nodes[0];
                 nodes[i].Previous = nodes[i - 1];
             }
-            else {
+            else { //Every other case
                 nodes[i].Next = nodes[i + 1];
                 nodes[i].Previous = nodes[i - 1];
             }
         }
     }
 
+    /// <summary>
+    /// Checks for singleton not to be null
+    /// </summary>
     void Start() {
         CreateCircularPath();
         if (instance == null)

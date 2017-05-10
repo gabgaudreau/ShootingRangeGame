@@ -25,6 +25,9 @@ public class CircularPathNode : MonoBehaviour {
             get { return worldPos; }
     }
 
+    /// <summary>
+    /// Initializes worldPos
+    /// </summary>
     void Start() {
         worldPos = transform.position;
     }

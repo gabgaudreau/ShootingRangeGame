@@ -18,7 +18,7 @@ public class NPC : MonoBehaviour {
         hp = 200;
         speed = 0.05f;
         nearRadius = 0.5f;
-        maxRotVel = 3.0f;
+        maxRotVel = 1.5f;
         currAcc = 1f;
         maxFleeVel = 2.0f;
         maxRotAcc = 0.01f;
@@ -26,10 +26,10 @@ public class NPC : MonoBehaviour {
         firstTarget = true;
     }
 
-    //what i want from movement: 
-    //go from node to node endlessly
-    //when you reach a new node (radius) put next node as target, rotate towards target while going towards target
-    //no slowing down
+    /// <summary>
+    /// Update function, runs every frame, finds the npc's target node and moves to that until
+    /// when it is close enough to his target, he will find the next node in his path and move to that node.
+    /// </summary>
     void Update() {
         //Timer for first node rotation by npc
         firstTimer -= Time.deltaTime;
@@ -39,7 +39,6 @@ public class NPC : MonoBehaviour {
         //only happens once, can't be run in start. try awake?
         if (target == null) {
             target = FindClosestNode();
-            Debug.Log("Next: " + target.Next);
         }
         //Move until close enough to target, then find next node
         Move(target.WorldPos, firstTarget);

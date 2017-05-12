@@ -34,7 +34,7 @@ public class CircularPath : MonoBehaviour {
     }
 
     /// <summary>
-    /// Checks for singleton not to be null
+    /// Checks for singleton not to be null and creates the path.
     /// </summary>
     void Start() {
         CreateCircularPath();

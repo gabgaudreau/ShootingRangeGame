@@ -706,6 +706,7 @@ GameObject:
   - component: {fileID: 126864010}
   - component: {fileID: 126864009}
   - component: {fileID: 126864011}
+  - component: {fileID: 126864012}
   m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Untagged
@@ -729,7 +730,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0.81, y: -1.92, z: 1.16}
+  m_Center: {x: 1.11, y: -1.92, z: 1.04}
 --- !u!4 &126864010
 Transform:
   m_ObjectHideFlags: 0
@@ -766,6 +767,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39c8fa43048f754e82927773b026edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &126864012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126864008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65807b50e69622b478b26d5dd923f908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 1
+  sensitivityX: 2.5
+  sensitivityY: 2.5
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!1 &130957582
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,6 +2606,7 @@ GameObject:
   - component: {fileID: 449485510}
   - component: {fileID: 449485509}
   - component: {fileID: 449485508}
+  - component: {fileID: 449485513}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -2664,6 +2684,24 @@ Transform:
   m_Father: {fileID: 126864010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+--- !u!114 &449485513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449485507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65807b50e69622b478b26d5dd923f908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 2
+  sensitivityX: 2.5
+  sensitivityY: 2.5
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!1 &459019082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4953,7 +4991,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 804644347}
-  m_LocalRotation: {x: -0, y: -0.75478816, z: -0, w: 0.65596855}
+  m_LocalRotation: {x: -0, y: -0.7547882, z: -0, w: 0.6559686}
   m_LocalPosition: {x: 1.4190211, y: -1.8392649, z: 1.3115877}
   m_LocalScale: {x: 0.082386196, y: 0.08238619, z: 0.08238619}
   m_Children: []
@@ -9232,7 +9270,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1448583431}
-  m_LocalRotation: {x: 0.43398577, y: -0.6827939, z: -0.31527987, w: 0.4960316}
+  m_LocalRotation: {x: 0.4339858, y: -0.682794, z: -0.3152799, w: 0.49603164}
   m_LocalPosition: {x: 1.3490603, y: -1.753265, z: 1.5415479}
   m_LocalScale: {x: 0.115724936, y: 0.25741988, z: 0.11572494}
   m_Children: []

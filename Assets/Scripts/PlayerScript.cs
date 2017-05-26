@@ -9,15 +9,21 @@ public class PlayerScript : MonoBehaviour {
     private float speed, jumpSpeed, gravitySpeed;
     private CharacterController CC;
     private Vector3 moveDirection = Vector3.zero;
-
+    
+    /// <summary>
+    /// Start function, initializes variables
+    /// </summary>
 	void Start () {
         CC = GetComponent<CharacterController>();
-        speed = 16.0f;
-        jumpSpeed = 15.0f;
-        gravitySpeed = 40.0f;
+        speed = 9.0f;
+        jumpSpeed = 10.0f;
+        gravitySpeed = 30.0f;
 	}
-	
-	void Update () {
+
+    /// <summary>
+    /// Update function, runs every frame, handles all directional movement as well as jumping and gravity.
+    /// </summary>
+    void Update () {
         //Calculating character movement based on input axis
         if (CC.isGrounded) {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));

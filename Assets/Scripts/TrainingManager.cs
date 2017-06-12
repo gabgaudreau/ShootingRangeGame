@@ -15,9 +15,14 @@ public class TrainingManager : MonoBehaviour {
     void Start () {
         playerScore = 0;
         firstSpawn = true;
+        Cursor.lockState = CursorLockMode.Locked;
 	}
 
     void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if(Cursor.lockState == CursorLockMode.Locked)
+                Cursor.lockState = CursorLockMode.None;
+        }
         if (firstSpawn) {
             Instantiate(npcPrefab, CircularPath.instance.Nodes[0].WorldPos, Quaternion.identity);
             Instantiate(npcPrefab, CircularPath.instance.Nodes[13].WorldPos, Quaternion.identity);

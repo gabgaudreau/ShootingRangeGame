@@ -24,6 +24,11 @@ public class PlayerScript : MonoBehaviour {
     /// Update function, runs every frame, handles all directional movement as well as jumping and gravity.
     /// </summary>
     void Update () {
+        //Fire Button is here, locks cursor if it is not already locked.
+        if (Input.GetButton("Fire")) {
+            if (Cursor.lockState == CursorLockMode.None)
+                Cursor.lockState = CursorLockMode.Locked;
+        }
         //Calculating character movement based on input axis
         if (CC.isGrounded) {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));

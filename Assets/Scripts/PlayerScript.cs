@@ -44,3 +44,6 @@ public class PlayerScript : MonoBehaviour {
         CC.Move(moveDirection * Time.deltaTime);
     }
 }
+
+//BUGS:
+//movement considers mouse orientation when calculating forward direction.

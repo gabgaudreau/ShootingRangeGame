@@ -11,14 +11,15 @@ public class MouseLook : MonoBehaviour {
 
     public enum Axes { XANDY, X, Y}
     public Axes axes = Axes.XANDY;
-    private float sensitivityX, sensitivityY, maxX, minX, maxY, minY, rotationY;
+    public float sensitivityX, sensitivityY;
+    private float maxX, minX, maxY, minY, rotationY;
 
     /// <summary>
     /// Start function, initializes variables
     /// </summary>
     void Start() {
-        sensitivityX = 2.5f;
-        sensitivityY = 2.5f;
+        sensitivityX = 1.2f;
+        sensitivityY = 1.2f;
         minX = -360.0f;
         maxX = 360.0f;
         minY = -60.0f;

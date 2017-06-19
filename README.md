@@ -1,4 +1,4 @@
 # ShootingRangeGame
-Starting development May 1st.
+Small aim practicing game I develop in my free time.
 
 # Practice your aim in a FPS Shooting Range.

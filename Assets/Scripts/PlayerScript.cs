@@ -1,7 +1,7 @@
 ﻿/**
 File Created May 22nd 2017 - File name = PlayerScript.cs
 Author: Gabriel Gaudreau
-Project: The1v1Game
+Project: ShootingRangeGame
 */
 using UnityEngine;
 
@@ -9,6 +9,8 @@ public class PlayerScript : MonoBehaviour {
     private float speed, jumpSpeed, gravitySpeed;
     private CharacterController CC;
     private Vector3 moveDirection = Vector3.zero;
+    [SerializeField]
+    GameObject bullet, casing;
     
     /// <summary>
     /// Start function, initializes variables
@@ -47,3 +49,6 @@ public class PlayerScript : MonoBehaviour {
 
 //BUGS:
 //movement considers mouse orientation when calculating forward direction.
+//no air strafing
+//raise barriers on bridge etc?
+

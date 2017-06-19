@@ -1,7 +1,7 @@
 ﻿/**
 File Created May 26th 2017 - File name = MouseLook.cs
 Author: Gabriel Gaudreau
-Project: The1v1Game
+Project: ShootingRangeGame
 **This script is based on an answer found in Unity3d Forums.**
 */
 using UnityEngine;

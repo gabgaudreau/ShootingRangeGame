@@ -1,7 +1,7 @@
 ﻿/**
 File Created May 12th 2017 - File name = ShootingRangeMovingTarget.cs
 Author: Gabriel Gaudreau
-Project: The1v1Game
+Project: ShootingRangeGame
 */
 using UnityEngine;
 

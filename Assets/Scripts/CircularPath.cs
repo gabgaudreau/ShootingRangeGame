@@ -1,7 +1,7 @@
 ﻿/**
 File Created May 5th 2017 - File name = CircularPath.cs
 Author: Gabriel Gaudreau
-Project: The1v1Game
+Project: ShootingRangeGame
 */
 using UnityEngine;
 

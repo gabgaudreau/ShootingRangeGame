@@ -1,7 +1,7 @@
 ﻿/**
 File Created May 11th 2017 - File name = Training_Manager.cs
 Author: Gabriel Gaudreau
-Project: The1v1Game
+Project: ShootingRangeGame
 */
 using UnityEngine;
 

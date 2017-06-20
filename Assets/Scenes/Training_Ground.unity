@@ -940,6 +940,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1438762600759458, guid: e0dbbf9ecbe0c514d9280d6e10035fb1, type: 2}
   casing: {fileID: 1200815437822322, guid: 490138da838508e45876a92464e3bb8e, type: 2}
+  shootingPoint: {fileID: 1811813256}
+  casingPoint: {fileID: 1820484279}
 --- !u!114 &126864012
 MonoBehaviour:
   m_ObjectHideFlags: 0

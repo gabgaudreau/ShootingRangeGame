@@ -6,11 +6,11 @@ Project: ShootingRangeGame
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
-    private float speed, jumpSpeed, gravitySpeed;
+    private float speed, jumpSpeed, gravitySpeed, fireTimer, fireRate;
     private CharacterController CC;
     private Vector3 moveDirection = Vector3.zero;
     [SerializeField]
-    GameObject bullet, casing;
+    GameObject bullet, casing, shootingPoint, casingPoint;
     
     /// <summary>
     /// Start function, initializes variables
@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour {
         speed = 9.0f;
         jumpSpeed = 10.0f;
         gravitySpeed = 30.0f;
+        fireTimer = fireRate = 0.25f;
 	}
 
     /// <summary>
@@ -27,9 +28,18 @@ public class PlayerScript : MonoBehaviour {
     /// </summary>
     void Update () {
         //Fire Button is here, locks cursor if it is not already locked.
-        if (Input.GetButton("Fire")) {
-            if (Cursor.lockState == CursorLockMode.None)
+        if (Input.GetButton("Fire") && fireTimer < 0) {
+            if (Cursor.lockState == CursorLockMode.None) {
                 Cursor.lockState = CursorLockMode.Locked;
+            }
+            //ray cast @ cursor
+            //get point to point angle?
+            //aim bullet using ^ angle
+            //add force
+            //bullet script
+            //casing
+            Instantiate(bullet, shootingPoint.transform.position, Quaternion.identity); //wrong orientation
+            fireTimer = fireRate;
         }
         //Calculating character movement based on input axis
         if (CC.isGrounded) {
@@ -44,6 +54,7 @@ public class PlayerScript : MonoBehaviour {
         //Gravity
         moveDirection.y -= gravitySpeed * Time.deltaTime;
         CC.Move(moveDirection * Time.deltaTime);
+        fireTimer -= Time.deltaTime;
     }
 }
 

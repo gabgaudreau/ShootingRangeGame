@@ -4,11 +4,15 @@ Author: Gabriel Gaudreau
 Project: ShootingRangeGame
 */
 using UnityEngine;
+using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
-    private float speed, jumpSpeed, gravitySpeed, fireTimer, fireRate;
+    private float speed, jumpSpeed, gravitySpeed, fireTimer, fireRate, weaponRange;
     private CharacterController CC;
     private Vector3 moveDirection = Vector3.zero;
+    private WaitForSeconds duration = new WaitForSeconds(0.05f);
+    private LineRenderer laserLine;
+    private AudioSource gunSound;
     [SerializeField]
     GameObject bullet, casing, shootingPoint, casingPoint;
     
@@ -17,11 +21,21 @@ public class PlayerScript : MonoBehaviour {
     /// </summary>
 	void Start () {
         CC = GetComponent<CharacterController>();
+        laserLine = GetComponent<LineRenderer>();
+        gunSound = GetComponent<AudioSource>();
         speed = 9.0f;
         jumpSpeed = 10.0f;
         gravitySpeed = 30.0f;
         fireTimer = fireRate = 0.25f;
+        weaponRange = 150.0f;
 	}
+
+    private IEnumerator ShotEffect() {
+        gunSound.Play();
+        laserLine.enabled = true;
+        yield return duration;
+        laserLine.enabled = false;
+    }
 
     /// <summary>
     /// Update function, runs every frame, handles all directional movement as well as jumping and gravity.
@@ -32,14 +46,18 @@ public class PlayerScript : MonoBehaviour {
             if (Cursor.lockState == CursorLockMode.None) {
                 Cursor.lockState = CursorLockMode.Locked;
             }
-            //ray cast @ cursor
-            //get point to point angle?
-            //aim bullet using ^ angle
-            //add force
-            //bullet script
-            //casing
-            Instantiate(bullet, shootingPoint.transform.position, Quaternion.identity); //wrong orientation
+            StartCoroutine(ShotEffect());
             fireTimer = fireRate;
+            Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+            RaycastHit hit;
+            laserLine.SetPosition(0, shootingPoint.transform.position);
+            if(Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit)) {
+                laserLine.SetPosition(1, hit.point);
+                Debug.Log(hit.collider.name);
+            }
+            else {
+                laserLine.SetPosition(1, rayOrigin + (Camera.main.transform.forward * weaponRange));
+            }
         }
         //Calculating character movement based on input axis
         if (CC.isGrounded) {

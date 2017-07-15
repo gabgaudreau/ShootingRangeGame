@@ -15,7 +15,7 @@ public class NPC : MonoBehaviour {
     /// Initializes different variables to different values
     /// </summary>
     void Start() {
-        hp = 200;
+        hp = 8; //4 Body shots, 2 in the head
         speed = 0.05f;
         nearRadius = 0.5f;
         maxRotVel = 1.5f;

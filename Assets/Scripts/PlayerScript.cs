@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour {
     private LineRenderer laserLine;
     private AudioSource gunSound;
     [SerializeField]
-    GameObject bullet, casing, shootingPoint, casingPoint;
+    GameObject shootingPoint;
     
     /// <summary>
     /// Start function, initializes variables
@@ -30,6 +30,10 @@ public class PlayerScript : MonoBehaviour {
         weaponRange = 150.0f;
 	}
 
+    /// <summary>
+    /// Shooting effect duration
+    /// </summary>
+    /// <returns>Returns waitforseconds</returns>
     private IEnumerator ShotEffect() {
         gunSound.Play();
         laserLine.enabled = true;
@@ -43,19 +47,22 @@ public class PlayerScript : MonoBehaviour {
     void Update () {
         //Fire Button is here, locks cursor if it is not already locked.
         if (Input.GetButton("Fire") && fireTimer < 0) {
+            //Lock the cursor back in the event that it isn't (i.e. used menus)
             if (Cursor.lockState == CursorLockMode.None) {
                 Cursor.lockState = CursorLockMode.Locked;
             }
             StartCoroutine(ShotEffect());
             fireTimer = fireRate;
+            //Origin of the ray, center of camera (0.5, 0.5)
             Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
             RaycastHit hit;
+            //Sets points to determine the line of the laser to be drawn
             laserLine.SetPosition(0, shootingPoint.transform.position);
             if(Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit)) {
                 laserLine.SetPosition(1, hit.point);
                 Debug.Log(hit.collider.name);
             }
-            else {
+            else { //If nothing is hit by the ray, just show the full distance of the ray
                 laserLine.SetPosition(1, rayOrigin + (Camera.main.transform.forward * weaponRange));
             }
         }
@@ -77,6 +84,7 @@ public class PlayerScript : MonoBehaviour {
 }
 
 //BUGS:
+//character collision is wonky, going halfway through walls
 //movement considers mouse orientation when calculating forward direction.
 //no air strafing
 //raise barriers on bridge etc?

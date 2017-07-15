@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 4954152986316014}
   - component: {fileID: 33166510753956430}
   - component: {fileID: 23254785160665264}
+  - component: {fileID: 64304852528665282}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -146,6 +147,7 @@ GameObject:
   - component: {fileID: 4629580578760944}
   - component: {fileID: 33781742402514088}
   - component: {fileID: 23066017489967660}
+  - component: {fileID: 64527120506133174}
   m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
@@ -234,7 +236,7 @@ GameObject:
   - component: {fileID: 136097600035861784}
   - component: {fileID: 23943129522337312}
   m_Layer: 0
-  m_Name: PowerSourceCore
+  m_Name: OuterPowerSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,7 +412,7 @@ GameObject:
   - component: {fileID: 136598105561665140}
   - component: {fileID: 23852257939160950}
   m_Layer: 0
-  m_Name: OuterPowerSource
+  m_Name: PowerSourceCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1478,6 +1480,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1250971308428832}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &64304852528665282
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1288028935522794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: b62db3299b0bb3846a2afe975cdb1559, type: 3}
+--- !u!64 &64527120506133174
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349554751526678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: b62db3299b0bb3846a2afe975cdb1559, type: 3}
 --- !u!114 &114692162228021442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1570,7 +1600,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1395416792421340}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -1635,7 +1665,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1384281667792224}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1

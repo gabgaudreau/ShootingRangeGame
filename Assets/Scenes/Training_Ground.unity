@@ -1569,10 +1569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39c8fa43048f754e82927773b026edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1438762600759458, guid: e0dbbf9ecbe0c514d9280d6e10035fb1, type: 2}
-  casing: {fileID: 1200815437822322, guid: 490138da838508e45876a92464e3bb8e, type: 2}
   shootingPoint: {fileID: 1379663405}
-  casingPoint: {fileID: 0}
 --- !u!143 &287710162
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3676,7 +3673,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &619740809 stripped
@@ -3862,7 +3860,8 @@ Prefab:
       propertyPath: m_Name
       value: AimTarget
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &646133128 stripped
@@ -4606,6 +4605,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c9c8f154194d8bf2b6655f918ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &788968178 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1201969319676392, guid: 788636b59e6c4ac40800e72ff9fe11ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 646133127}
+--- !u!64 &788968179
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 788968178}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &795270657
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,7 +5160,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &894745717 stripped
@@ -5559,7 +5578,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &957855739 stripped
@@ -6801,7 +6821,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1119558531 stripped
@@ -6955,7 +6976,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1122223634 stripped
@@ -8673,7 +8695,8 @@ Prefab:
       propertyPath: m_Name
       value: AimTarget
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1385998526 stripped
@@ -9902,7 +9925,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1704476040 stripped

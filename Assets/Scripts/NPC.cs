@@ -3,9 +3,10 @@ File Created May 5th 2017 - File name = NPC.cs
 Author: Gabriel Gaudreau
 Project: ShootingRangeGame
 */
+using System;
 using UnityEngine;
 
-public class NPC : MonoBehaviour {
+public class NPC : MonoBehaviour, IShootable {
     private float  hp, speed, nearRadius, currRotVel, currVel, maxRotAcc, maxRotVel, currAcc, maxFleeVel, firstTimer;
     private CircularPathNode target = null;
     private Vector3 direction;
@@ -45,6 +46,16 @@ public class NPC : MonoBehaviour {
         if (Vector3.Distance(target.WorldPos, transform.position) < nearRadius) {
             target = target.Next;
         }
+    }
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    void IShootable.GotShot() {
+        throw new NotImplementedException();
+        //find wether head or body got hit
+        //edit hp
+        //handle score
     }
 
     /// <summary>

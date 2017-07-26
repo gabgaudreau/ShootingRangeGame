@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour {
             if (Cursor.lockState == CursorLockMode.None) {
                 Cursor.lockState = CursorLockMode.Locked;
             }
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             Instantiate(bullet, shootingPoint.transform.position, Camera.main.transform.rotation);
             gunSound.Play();
             fireTimer = fireRate;

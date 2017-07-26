@@ -8759,28 +8759,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1201969319676392, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
-      propertyPath: m_Name
-      value: MiddleTarget
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840781908390028, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.3536534
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840781908390028, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.035397183
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840781908390028, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.3536599
-      objectReference: {fileID: 0}
     - target: {fileID: 1528596857873450, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
       propertyPath: m_Name
       value: AimTarget
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 136506158471314528, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 788636b59e6c4ac40800e72ff9fe11ff, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1385998526 stripped

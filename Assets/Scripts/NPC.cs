@@ -52,10 +52,10 @@ public class NPC : MonoBehaviour, IShootable {
     /// TODO
     /// </summary>
     void IShootable.GotShot() {
-        throw new NotImplementedException();
         //find wether head or body got hit
         //edit hp
         //handle score
+        Debug.Log("enemy got shot");
     }
 
     /// <summary>

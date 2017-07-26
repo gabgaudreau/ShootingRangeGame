@@ -9,13 +9,12 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
     public float force;
     private WaitForSeconds destroyTimer = new WaitForSeconds(6.0f);
-    private bool _hit;
+    private bool _once, _hit; //Keeps a bool on if the bullet has already hit something or not
     private Rigidbody rb;
     /// <summary>
     /// 
     /// </summary>
     void Start() {
-        _hit = false;
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         StartCoroutine(Destroy());
@@ -29,9 +28,7 @@ public class Bullet : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, (transform.position - transform.position + (transform.forward * (rb.velocity.magnitude * Time.deltaTime))).normalized, out hit) && !_hit) {
             _hit = true;
-            transform.position = hit.point; //temp fix
-            //problem for another day, all info needed is in the hit variable
-            //apply physics???
+            transform.position = hit.point; 
         }
     }
 
@@ -60,5 +57,12 @@ public class Bullet : MonoBehaviour {
     /// <param name="col">col is the object that the bullet collides with.</param>
     void OnCollisionEnter(Collision col) {
         HandleBulletCollision();
+        if(col.gameObject.layer == LayerMask.NameToLayer("Shootable") && !_once) {
+            _once = true;
+            IShootable shootable = col.gameObject.GetComponentInParent<IShootable>();
+            if(shootable != null) {
+                shootable.GotShot();
+            }
+        }
     }
 }

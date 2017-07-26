@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33140814741703112}
   - component: {fileID: 136695945415356612}
   - component: {fileID: 23642257499820318}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MiddleTarget
   m_TagString: MiddleTarget
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33156949059291564}
   - component: {fileID: 136093687209529910}
   - component: {fileID: 23376766587126054}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OutterPlusTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 33384301022658206}
   - component: {fileID: 136670520347069290}
   - component: {fileID: 23744241500203470}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MiddleMinusTwo
   m_TagString: MiddleMinusTwo
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 33315095627058228}
   - component: {fileID: 136249753726720182}
   - component: {fileID: 23457048725316032}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OutterPlusOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,8 @@ GameObject:
   - component: {fileID: 4840781908390028}
   - component: {fileID: 33093915914671860}
   - component: {fileID: 23275746306496574}
-  m_Layer: 0
+  - component: {fileID: 114910871383813790}
+  m_Layer: 10
   m_Name: Aim_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +112,7 @@ GameObject:
   - component: {fileID: 33934394289233188}
   - component: {fileID: 136968497840212780}
   - component: {fileID: 23492847647891594}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MiddleMinusOne
   m_TagString: MiddleMinusOne
   m_Icon: {fileID: 0}
@@ -190,8 +191,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1528596857873450}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.47, y: 9.88, z: 14.52}
-  m_LocalScale: {x: 1.3536553, y: 0.03539964, z: 1.3536592}
+  m_LocalPosition: {x: 0.47, y: 13.68, z: 35.95}
+  m_LocalScale: {x: 1.3536534, y: 0.035397183, z: 1.3536599}
   m_Children:
   - {fileID: 4181455518104032}
   - {fileID: 4060127129151278}
@@ -435,6 +436,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1736705644779910}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114910871383813790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1528596857873450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5bb558f2e91974781fb0134893dddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136093687209529910
 CapsuleCollider:
   m_ObjectHideFlags: 1

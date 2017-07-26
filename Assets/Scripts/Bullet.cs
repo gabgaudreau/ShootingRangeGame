@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour {
     private WaitForSeconds destroyTimer = new WaitForSeconds(6.0f);
     private bool _once, _hit; //Keeps a bool on if the bullet has already hit something or not
     private Rigidbody rb;
+
     /// <summary>
     /// 
     /// </summary>
@@ -25,11 +26,11 @@ public class Bullet : MonoBehaviour {
     /// </summary>
     void Update() {
         //looking ahead to the next frame to see if a collision is incoming
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, (transform.position - transform.position + (transform.forward * (rb.velocity.magnitude * Time.deltaTime))).normalized, out hit) && !_hit) {
-            _hit = true;
-            transform.position = hit.point; 
-        }
+        //RaycastHit hit;
+        //if (Physics.Raycast(transform.position, (transform.position - transform.position + (transform.forward * (rb.velocity.magnitude * Time.deltaTime))).normalized, out hit) && !_hit) {
+        //    _hit = true;
+        //    transform.position = hit.point;
+        //}
     }
 
     /// <summary>
@@ -59,6 +60,7 @@ public class Bullet : MonoBehaviour {
         HandleBulletCollision();
         if(col.gameObject.layer == LayerMask.NameToLayer("Shootable") && !_once) {
             _once = true;
+            //Using IShootable interface to send a call to any object hit that has the Shootable layer.
             IShootable shootable = col.gameObject.GetComponentInParent<IShootable>();
             if(shootable != null) {
                 shootable.GotShot();

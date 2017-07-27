@@ -87,10 +87,3 @@ public class PlayerScript : MonoBehaviour {
         fireTimer -= Time.deltaTime;
     }
 }
-
-//BUGS:
-//character collision is wonky, going halfway through walls
-//movement considers mouse orientation when calculating forward direction.
-//no air strafing
-//raise barriers on bridge etc?
-

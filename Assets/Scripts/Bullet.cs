@@ -13,24 +13,12 @@ public class Bullet : MonoBehaviour {
     private Rigidbody rb;
 
     /// <summary>
-    /// 
+    /// Start method, adds force to the bullet on start.
     /// </summary>
     void Start() {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         StartCoroutine(Destroy());
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    void Update() {
-        //looking ahead to the next frame to see if a collision is incoming
-        //RaycastHit hit;
-        //if (Physics.Raycast(transform.position, (transform.position - transform.position + (transform.forward * (rb.velocity.magnitude * Time.deltaTime))).normalized, out hit) && !_hit) {
-        //    _hit = true;
-        //    transform.position = hit.point;
-        //}
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     private bool firstSpawn;
 
     /// <summary>
-    /// 
+    /// Initializes singleton in the event that it is null
     /// </summary>
     void Awake() {
         if (gm == null)
@@ -24,22 +24,22 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// 
+    /// public method to add score.
     /// </summary>
-    /// <param name="x"></param>
+    /// <param name="x">x is a float value passed it.</param>
     public void AddScore(float x) {
         playerScore += x;
     }
 
     /// <summary>
-    /// 
+    /// public method to add to the shotcounter variable. Used with the singleton
     /// </summary>
     public void AddShotCounter() {
         shotCounter++;
     }
 
     /// <summary>
-    /// 
+    /// Start method, initializes variables and locks cursor.
     /// </summary>
     void Start () {
         firstSpawn = true;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     /// <summary>
-    /// 
+    /// Update method, on escape, the cursor is unlocked and this method will spawn the initial wave of target dummies.
     /// </summary>
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -70,3 +70,8 @@ public class GameManager : MonoBehaviour {
 //TODO:
 //uh comments.
 //make enemies die and respawn
+//canvas score/shot/stuff
+
+//BUGS:
+//movement considers mouse orientation when calculating forward direction.
+//no air strafing

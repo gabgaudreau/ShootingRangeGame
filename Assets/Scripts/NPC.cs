@@ -52,8 +52,9 @@ public class NPC : MonoBehaviour, IShootable {
     }
 
     /// <summary>
-    /// TODO
+    /// Method from the IShootable interface, called when the target is hit by a projectile.
     /// </summary>
+    /// <param name="objectHit">name of the object hit.</param>
     void IShootable.GotShot(string objectHit) {
         /**
         based on 100hp

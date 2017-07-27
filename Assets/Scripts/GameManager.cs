@@ -5,24 +5,56 @@ Project: ShootingRangeGame
 */
 using UnityEngine;
 
-public class TrainingManager : MonoBehaviour {
+public class GameManager : MonoBehaviour {
+    public static GameManager gm;
+
     // 0 - 13 - 26
     [SerializeField]
     GameObject npcPrefab;
     private float playerScore;
+    private int shotCounter;
     private bool firstSpawn;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    void Awake() {
+        if (gm == null)
+            gm = this;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="x"></param>
+    public void AddScore(float x) {
+        playerScore += x;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void AddShotCounter() {
+        shotCounter++;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     void Start () {
-        playerScore = 0;
         firstSpawn = true;
         Cursor.lockState = CursorLockMode.Locked;
 	}
 
+    /// <summary>
+    /// 
+    /// </summary>
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if(Cursor.lockState == CursorLockMode.Locked)
                 Cursor.lockState = CursorLockMode.None;
         }
+        //can this be run in start?? using a bool to only execute once in update. This is the initial spawn of enemies.
         if (firstSpawn) {
             Instantiate(npcPrefab, CircularPath.instance.Nodes[0].WorldPos, Quaternion.identity);
             Instantiate(npcPrefab, CircularPath.instance.Nodes[13].WorldPos, Quaternion.identity);
@@ -34,3 +66,7 @@ public class TrainingManager : MonoBehaviour {
 //Respawn Idea:
 //Do something where the npc that get killed is never destroyed -> hide mesh -> instantiate body explosion -> wait some delay -> show mesh again
 //this will keep the equal interval between npcs at all times.
+
+//TODO:
+//uh comments.
+//make enemies die and respawn

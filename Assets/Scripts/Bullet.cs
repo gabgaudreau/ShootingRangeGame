@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour {
             //Using IShootable interface to send a call to any object hit that has the Shootable layer.
             IShootable shootable = col.gameObject.GetComponentInParent<IShootable>();
             if(shootable != null) {
-                shootable.GotShot();
+                shootable.GotShot(col.gameObject.name);
             }
         }
     }

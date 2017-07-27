@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour {
     private Vector3 rayOrigin;
     [SerializeField]
     GameObject shootingPoint, bullet;
-    
+
     /// <summary>
     /// Start function, initializes variables
     /// </summary>
@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour {
             if (Cursor.lockState == CursorLockMode.None) {
                 Cursor.lockState = CursorLockMode.Locked;
             }
-            //Debug.Log(hit.collider.name);
+            GameManager.gm.AddShotCounter();
             Instantiate(bullet, shootingPoint.transform.position, Camera.main.transform.rotation);
             gunSound.Play();
             fireTimer = fireRate;

@@ -80,6 +80,9 @@ public class GameManager : MonoBehaviour {
 //TODO:
 //uh comments.
 //make enemies die and respawn
+//make targets die and respawn
+//make moving target a children of shooting target so it inherits the whole class but has diff death and respawn since its moving
+//or make a parent class shooting target and have the wallmounted and moving be children <<<<<< looks better
 
 //BUGS:
 //movement considers mouse orientation when calculating forward direction.

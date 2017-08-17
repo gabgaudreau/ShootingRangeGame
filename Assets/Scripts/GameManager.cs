@@ -4,6 +4,7 @@ Author: Gabriel Gaudreau
 Project: ShootingRangeGame
 */
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public static GameManager gm;
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour {
     private float playerScore;
     private int shotCounter;
     private bool firstSpawn;
+    [SerializeField]
+    Text scoreText, scorePerShotText, shotCounterText;
 
     /// <summary>
     /// Initializes singleton in the event that it is null
@@ -29,6 +32,8 @@ public class GameManager : MonoBehaviour {
     /// <param name="x">x is a float value passed it.</param>
     public void AddScore(float x) {
         playerScore += x;
+        scoreText.text = string.Format("Score: {0:#}", playerScore);
+        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
     }
 
     /// <summary>
@@ -36,6 +41,8 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void AddShotCounter() {
         shotCounter++;
+        shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
+        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
     }
 
     /// <summary>
@@ -44,7 +51,10 @@ public class GameManager : MonoBehaviour {
     void Start () {
         firstSpawn = true;
         Cursor.lockState = CursorLockMode.Locked;
-	}
+        scoreText.text = string.Format("Score: {0:#}", playerScore);
+        shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
+        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
+    }
 
     /// <summary>
     /// Update method, on escape, the cursor is unlocked and this method will spawn the initial wave of target dummies.
@@ -70,7 +80,6 @@ public class GameManager : MonoBehaviour {
 //TODO:
 //uh comments.
 //make enemies die and respawn
-//canvas score/shot/stuff
 
 //BUGS:
 //movement considers mouse orientation when calculating forward direction.

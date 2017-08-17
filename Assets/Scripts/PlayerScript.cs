@@ -33,17 +33,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// Shooting effect duration
-    /// </summary>
-    /// <returns>Returns waitforseconds</returns>
-    private IEnumerator ShotEffect() {
-        gunSound.Play();
-        laserLine.enabled = true;
-        yield return duration;
-        laserLine.enabled = false;
-    }
-
-    /// <summary>
     /// Update function, runs every frame, handles all directional movement as well as jumping and gravity.
     /// </summary>
     void Update () {

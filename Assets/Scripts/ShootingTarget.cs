@@ -6,19 +6,62 @@ Project: ShootingRangeGame
 using UnityEngine;
 
 public class ShootingTarget : MonoBehaviour, IShootable {
-    private float hp, middleDMG, middlePlusOneDMG, middlePlusTwoDMG, middlePlusThreeDMG, middlePlusFourDMG, middlePlusFiveDMG;
+    private float hp, middleDMG, middlePlusOneDMG, middlePlusTwoDMG, middlePlusThreeDMG, middlePlusFourDMG, middlePlusFiveDMG, deadTimer;
+    private bool dead, first;
+    private MeshRenderer[] meshes;
 
     /// <summary>
     /// Start function, initializes variables.
     /// </summary>
     void Start() {
-        hp = 100;
+        first = true;
+        deadTimer = 25.0f;
+        hp = 200;
         middleDMG = 100;
         middlePlusOneDMG = 85;
         middlePlusTwoDMG = 65;
         middlePlusThreeDMG = 50;
         middlePlusFourDMG = 30;
         middlePlusFiveDMG = 15;
+        meshes = GetComponentsInChildren<MeshRenderer>();
+    }
+
+    /// <summary>
+    /// This will hide all the meshes of the object.
+    /// </summary>
+    void Hide() {
+        foreach (MeshRenderer m in meshes) {
+            m.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// This will show all the meshes of the object.
+    /// </summary>
+    void Show() {
+        foreach (MeshRenderer m in meshes) {
+            m.enabled = true;
+        }
+    }
+
+    /// <summary>
+    /// Update function, checks wether the target is dead or alive and hides/shows the meshes accordingly, also keeps track of the death timer.
+    /// </summary>
+    void Update() {
+        if(deadTimer < 0) { //Target is now alive again.
+            dead = false;
+            deadTimer = 25.0f;
+            first = true;
+            hp = 200;
+            Show();
+        }
+        if (dead) { //Target is dead.
+            deadTimer -= Time.deltaTime;
+            if (first) {
+                Hide();
+                first = false;
+            }
+        }
     }
 
     /// <summary>
@@ -27,29 +70,39 @@ public class ShootingTarget : MonoBehaviour, IShootable {
     /// </summary>
     /// <param name="objectHit">name of the object hit.</param>
     public void GotShot(string objectHit) {
-        if(objectHit == "MiddlePlus5") {
-            hp -= middlePlusFiveDMG;
-            GameManager.gm.AddScore(middlePlusFiveDMG);
-        }
-        else if(objectHit == "MiddlePlus4") {
-            hp -= middlePlusFourDMG;
-            GameManager.gm.AddScore(middlePlusFourDMG);
-        }
-        else if (objectHit == "MiddlePlus3") {
-            hp -= middlePlusThreeDMG;
-            GameManager.gm.AddScore(middlePlusThreeDMG);
-        }
-        else if (objectHit == "MiddlePlus2") {
-            hp -= middlePlusTwoDMG;
-            GameManager.gm.AddScore(middlePlusTwoDMG);
-        }
-        else if (objectHit == "MiddlePlus1") {
-            hp -= middlePlusOneDMG;
-            GameManager.gm.AddScore(middlePlusOneDMG);
-        }
-        else if (objectHit == "Middle") {
-            hp -= middleDMG;
-            GameManager.gm.AddScore(middleDMG);
+        if (!dead) {
+            if (objectHit == "MiddlePlus5") {
+                hp -= middlePlusFiveDMG;
+                GameManager.gm.AddScore(middlePlusFiveDMG);
+            }
+            else if (objectHit == "MiddlePlus4") {
+                hp -= middlePlusFourDMG;
+                GameManager.gm.AddScore(middlePlusFourDMG);
+            }
+            else if (objectHit == "MiddlePlus3") {
+                hp -= middlePlusThreeDMG;
+                GameManager.gm.AddScore(middlePlusThreeDMG);
+            }
+            else if (objectHit == "MiddlePlus2") {
+                Debug.Log("hit");
+
+                hp -= middlePlusTwoDMG;
+                GameManager.gm.AddScore(middlePlusTwoDMG);
+            }
+            else if (objectHit == "MiddlePlus1") {
+                Debug.Log("hit");
+
+                hp -= middlePlusOneDMG;
+                GameManager.gm.AddScore(middlePlusOneDMG);
+            }
+            else if (objectHit == "Middle") {
+                Debug.Log("hit");
+                hp -= middleDMG;
+                GameManager.gm.AddScore(middleDMG);
+            }
+            if (hp <= 0) {
+                dead = true;
+            }
         }
     }
 }

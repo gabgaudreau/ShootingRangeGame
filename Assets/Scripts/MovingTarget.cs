@@ -5,7 +5,7 @@ Project: ShootingRangeGame
 */
 using UnityEngine;
 
-public class ShootingRangeMovingTarget : MonoBehaviour {
+public class MovingTarget : MonoBehaviour  {
     //far left is z = 12.56f
     //far right is z = 2.07f
     //those values are relative to the ShootingRange GameObject
@@ -62,7 +62,9 @@ public class ShootingRangeMovingTarget : MonoBehaviour {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         else if (state == Direction.LEFT)
             transform.Translate(Vector3.back * Time.deltaTime * speed);
-    }
+    }     
 }
+
+
 //IDEA:
 //Target despawns when hit and respawns after a short delay? use same technique as wandering npc of hiding mesh to keep proper moving position

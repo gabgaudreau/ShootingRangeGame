@@ -84,19 +84,14 @@ public class ShootingTarget : MonoBehaviour, IShootable {
                 GameManager.gm.AddScore(middlePlusThreeDMG);
             }
             else if (objectHit == "MiddlePlus2") {
-                Debug.Log("hit");
-
                 hp -= middlePlusTwoDMG;
                 GameManager.gm.AddScore(middlePlusTwoDMG);
             }
             else if (objectHit == "MiddlePlus1") {
-                Debug.Log("hit");
-
                 hp -= middlePlusOneDMG;
                 GameManager.gm.AddScore(middlePlusOneDMG);
             }
             else if (objectHit == "Middle") {
-                Debug.Log("hit");
                 hp -= middleDMG;
                 GameManager.gm.AddScore(middleDMG);
             }

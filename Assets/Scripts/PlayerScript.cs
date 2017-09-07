@@ -49,7 +49,7 @@ public class PlayerScript : MonoBehaviour {
         }
         laserLine.enabled = true;
         //Fire Button is here, locks cursor if it is not already locked.
-        if (Input.GetButton("Fire") && fireTimer < 0) {
+        if (Input.GetButton("Fire") && fireTimer < 0 && GameManager.gm.GetShotsLeft() > 0) {
             //Lock the cursor back in the event that it isn't (i.e. used menus)
             if (Cursor.lockState == CursorLockMode.None) {
                 Cursor.lockState = CursorLockMode.Locked;

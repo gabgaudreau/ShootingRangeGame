@@ -699,10 +699,10 @@ Transform:
   - {fileID: 163526270}
   - {fileID: 722547488}
   - {fileID: 1688250363}
-  - {fileID: 1286796616}
-  - {fileID: 76832812}
   - {fileID: 866951836}
   - {fileID: 972091456}
+  - {fileID: 1286796616}
+  - {fileID: 76832812}
   m_Father: {fileID: 1161065458}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3071,6 +3071,80 @@ Transform:
   m_PrefabParentObject: {fileID: 4712549434082442, guid: c53d270cfcd74e94ba83134380053fc4,
     type: 2}
   m_PrefabInternal: {fileID: 1065491649}
+--- !u!1 &513716434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 513716435}
+  - component: {fileID: 513716437}
+  - component: {fileID: 513716436}
+  m_Layer: 5
+  m_Name: Shots Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &513716435
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 513716434}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2070518404}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 167, y: 48}
+  m_SizeDelta: {x: 314.69995, y: 31.299988}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &513716436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 513716434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 01cd679a1b9ee48bf9c546f6ce2cb97e, type: 3}
+    m_FontSize: 18
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "AMMO: \u221E\n"
+--- !u!222 &513716437
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 513716434}
 --- !u!1 &529830345
 GameObject:
   m_ObjectHideFlags: 0
@@ -8642,7 +8716,7 @@ GameObject:
   m_Layer: 0
   m_Name: ShootingPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -12326,7 +12400,7 @@ GameObject:
   - component: {fileID: 2060709242}
   - component: {fileID: 2060709241}
   m_Layer: 0
-  m_Name: TrainingManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12347,6 +12421,7 @@ MonoBehaviour:
   scoreText: {fileID: 142390061}
   scorePerShotText: {fileID: 2061891383}
   shotCounterText: {fileID: 1265295166}
+  shotsLeftText: {fileID: 513716436}
 --- !u!4 &2060709242
 Transform:
   m_ObjectHideFlags: 0
@@ -12525,6 +12600,7 @@ RectTransform:
   - {fileID: 142390060}
   - {fileID: 1265295165}
   - {fileID: 2061891382}
+  - {fileID: 513716435}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

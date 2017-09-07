@@ -7,10 +7,11 @@ using System;
 using UnityEngine;
 
 public class NPC : MonoBehaviour, IShootable {
-    private float hp, speed, nearRadius, currRotVel, currVel, maxRotAcc, maxRotVel, currAcc, maxFleeVel, firstTimer, eyeDMG, headDMG, coreDMG, bodyDMG;
+    private float hp, deadTimer, speed, nearRadius, currRotVel, currVel, maxRotAcc, maxRotVel, currAcc, maxFleeVel, firstTimer, eyeDMG, headDMG, coreDMG, bodyDMG;
     private CircularPathNode target = null;
     private Vector3 direction;
-    private bool firstTarget;
+    private bool firstTarget, dead, firstDead;
+    private MeshRenderer[] meshes;
 
     /// <summary>
     /// Initializes different variables to different values
@@ -28,27 +29,59 @@ public class NPC : MonoBehaviour, IShootable {
         maxRotAcc = 0.01f;
         firstTimer = 1.0f;
         firstTarget = true;
+        firstDead = true;
+        deadTimer = 5.0f;
+        meshes = GetComponentsInChildren<MeshRenderer>();
+        Debug.Log(meshes.Length);
     }
 
+    private void HideMesh() {
+        foreach (MeshRenderer m in meshes) {
+            m.enabled = false;
+        }
+    }
+
+    private void ShowMesh() {
+        foreach (MeshRenderer m in meshes) {
+            m.enabled = true;
+        }
+    }
+    
     /// <summary>
     /// Update function, runs every frame, finds the npc's target node and moves to that until
     /// when it is close enough to his target, he will find the next node in his path and move to that node.
     /// </summary>
     void Update() {
-        //Timer for first node rotation by npc
-        firstTimer -= Time.deltaTime;
-        if (firstTimer < 0.0f) {
-            firstTarget = false;
+        if (!dead) {
+            //Timer for first node rotation by npc
+            firstTimer -= Time.deltaTime;
+            if (firstTimer < 0.0f) {
+                firstTarget = false;
+            }
+            //only happens once, can't be run in start. try awake?
+            if (target == null) {
+                target = FindClosestNode();
+            }
+            //Move until close enough to target, then find next node
+            Move(target.WorldPos, firstTarget);
+            if (Vector3.Distance(target.WorldPos, transform.position) < nearRadius) {
+                target = target.Next;
+            }
         }
-        //only happens once, can't be run in start. try awake?
-        if (target == null) {
-            target = FindClosestNode();
-        }
-        //Move until close enough to target, then find next node
-        Move(target.WorldPos, firstTarget);
-        if (Vector3.Distance(target.WorldPos, transform.position) < nearRadius) {
-            target = target.Next;
-        }
+        //else {
+        //    deadTimer -= Time.deltaTime;
+        //    if(deadTimer < 0) {
+        //        deadTimer = 5.0f;
+        //        hp = 100;
+        //        ShowMesh();
+        //        firstDead = true;
+        //        dead = false;
+        //    }
+        //    if (firstDead) {
+        //        firstDead = false;
+        //        HideMesh();
+        //    }
+        //}
     }
 
     /// <summary>
@@ -63,21 +96,26 @@ public class NPC : MonoBehaviour, IShootable {
         core - 50hp - 50pts
         body - 25hp - 25pts
         */
-        if (objectHit == "Eye") {
-            hp -= eyeDMG;
-            GameManager.gm.AddScore(eyeDMG);
-        }
-        else if (objectHit == "Head") {
-            hp -= headDMG;
-            GameManager.gm.AddScore(headDMG);
-        }
-        else if (objectHit == "PowerSourceCore") {
-            hp -= coreDMG;
-            GameManager.gm.AddScore(coreDMG);
-        }
-        else { //Body includes everything that isn't eye, head or core.
-            hp -= bodyDMG;
-            GameManager.gm.AddScore(bodyDMG);
+        if (!dead) {
+            if (objectHit == "Eye") {
+                hp -= eyeDMG;
+                GameManager.gm.AddScore(eyeDMG);
+            }
+            else if (objectHit == "Head") {
+                hp -= headDMG;
+                GameManager.gm.AddScore(headDMG);
+            }
+            else if (objectHit == "PowerSourceCore") {
+                hp -= coreDMG;
+                GameManager.gm.AddScore(coreDMG);
+            }
+            else { //Body includes everything that isn't eye, head or core.
+                hp -= bodyDMG;
+                GameManager.gm.AddScore(bodyDMG);
+            }
+            if (hp <= 0) {
+                dead = true;
+            }
         }
     }
 

@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject npcPrefab;
     private float playerScore;
-    private int shotCounter;
+    private int shotCounter, shotsLeft;
     private bool firstSpawn;
     [SerializeField]
-    Text scoreText, scorePerShotText, shotCounterText;
+    Text scoreText, scorePerShotText, shotCounterText, shotsLeftText;
 
     /// <summary>
     /// Initializes singleton in the event that it is null
@@ -37,23 +37,35 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// public method to add to the shotcounter variable. Used with the singleton
+    /// Returns the amount of shots left.
+    /// </summary>
+    /// <returns>Int</returns>
+    public int GetShotsLeft() {
+        return shotsLeft;
+    }
+
+    /// <summary>
+    /// public method to add to the shotcounter variable. Used with the singleton, updates text info as well.
     /// </summary>
     public void AddShotCounter() {
         shotCounter++;
+        shotsLeft--;
         shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
         scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
+        shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
     }
 
     /// <summary>
     /// Start method, initializes variables and locks cursor.
     /// </summary>
     void Start () {
+        shotsLeft = 1000;
         firstSpawn = true;
         Cursor.lockState = CursorLockMode.Locked;
         scoreText.text = string.Format("Score: {0:#}", playerScore);
         shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
         scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
+        shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
     }
 
     /// <summary>
@@ -78,12 +90,13 @@ public class GameManager : MonoBehaviour {
 //this will keep the equal interval between npcs at all times.
 
 //TODO:
-//uh comments.
 //make enemies die and respawn
-//make targets die and respawn
-//make moving target a children of shooting target so it inherits the whole class but has diff death and respawn since its moving
-//or make a parent class shooting target and have the wallmounted and moving be children <<<<<< looks better
+//menu --> buttons that set time/# of shots then a start button to begin. maybe a default settings button
+//high score
+//game modes? round times? # of shots
+//reload/magazine.
 
 //BUGS:
+//player position in editor
 //movement considers mouse orientation when calculating forward direction.
 //no air strafing

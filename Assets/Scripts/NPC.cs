@@ -14,6 +14,8 @@ public class NPC : MonoBehaviour, IShootable {
     private MeshRenderer[] meshes;
     private ParticleSystem[] particleSystems;
     private Collider[] colliders;
+    [SerializeField]
+    GameObject deadDummy;
 
     /// <summary>
     /// Initializes different variables to different values
@@ -36,11 +38,10 @@ public class NPC : MonoBehaviour, IShootable {
         meshes = GetComponentsInChildren<MeshRenderer>();
         particleSystems = GetComponentsInChildren<ParticleSystem>();
         colliders = GetComponentsInChildren<Collider>();
-        Debug.Log(colliders.Length);
     }
 
     /// <summary>
-    /// 
+    /// This method will hide the NPC object in the game, including meshes, particle systems and colliders. 
     /// </summary>
     private void HideMesh() {
         foreach (MeshRenderer m in meshes) {
@@ -55,7 +56,7 @@ public class NPC : MonoBehaviour, IShootable {
     }
 
     /// <summary>
-    /// 
+    /// This method will show the NPC object in the game, including meshes, particle systems and colliders.
     /// </summary>
     private void ShowMesh() {
         foreach (MeshRenderer m in meshes) {
@@ -72,6 +73,8 @@ public class NPC : MonoBehaviour, IShootable {
     /// <summary>
     /// Update function, runs every frame, finds the npc's target node and moves to that until
     /// when it is close enough to his target, he will find the next node in his path and move to that node.
+    /// Also handles what the NPC does while it is dead. Keeps moving, but hides meshes and disables colliders.
+    /// This way, the NPCs keep an equal interval between them.
     /// </summary>
     void Update() {
             //Timer for first node rotation by npc
@@ -90,11 +93,11 @@ public class NPC : MonoBehaviour, IShootable {
             }
         if(dead) {
             deadTimer -= Time.deltaTime;
-            if (firstDead) {
+            if (firstDead) { // Only executes the first frame the NPC is dead
                 firstDead = false;
                 HideMesh();
             }
-            if (deadTimer < 0) {
+            if (deadTimer < 0) { // NPC is now alive again
                 deadTimer = 25.0f;
                 hp = 200;
                 ShowMesh();
@@ -111,7 +114,6 @@ public class NPC : MonoBehaviour, IShootable {
     /// <param name="objectHit">name of the object hit.</param>
     void IShootable.GotShot(string objectHit) {
         /**
-        based on 100hp
         eye - 75hp - 75pts
         head - 50hp - 50pts
         core - 50hp - 50pts
@@ -130,12 +132,13 @@ public class NPC : MonoBehaviour, IShootable {
                 hp -= coreDMG;
                 GameManager.gm.AddScore(coreDMG);
             }
-            else { //Body includes everything that isn't eye, head or core.
+            else { // Body includes everything that isn't eye, head or core.
                 hp -= bodyDMG;
                 GameManager.gm.AddScore(bodyDMG);
             }
-            if (hp <= 0) {
+            if (hp <= 0) { // NPC dies.
                 dead = true;
+                Instantiate(deadDummy, transform.position, transform.rotation);
             }
         }
     }

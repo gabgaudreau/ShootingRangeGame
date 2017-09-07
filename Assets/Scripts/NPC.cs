@@ -12,12 +12,14 @@ public class NPC : MonoBehaviour, IShootable {
     private Vector3 direction;
     private bool firstTarget, dead, firstDead;
     private MeshRenderer[] meshes;
+    private ParticleSystem[] particleSystems;
+    private Collider[] colliders;
 
     /// <summary>
     /// Initializes different variables to different values
     /// </summary>
     void Start() {
-        hp = 100; //4 Body shots, 2 in the head
+        hp = 200; 
         eyeDMG = 75;
         headDMG = coreDMG = 50;
         bodyDMG = 25;
@@ -30,20 +32,40 @@ public class NPC : MonoBehaviour, IShootable {
         firstTimer = 1.0f;
         firstTarget = true;
         firstDead = true;
-        deadTimer = 5.0f;
+        deadTimer = 25.0f;
         meshes = GetComponentsInChildren<MeshRenderer>();
-        Debug.Log(meshes.Length);
+        particleSystems = GetComponentsInChildren<ParticleSystem>();
+        colliders = GetComponentsInChildren<Collider>();
+        Debug.Log(colliders.Length);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void HideMesh() {
         foreach (MeshRenderer m in meshes) {
             m.enabled = false;
         }
+        foreach (ParticleSystem ps in particleSystems) {
+            ps.Stop();
+        }
+        foreach (Collider c in colliders) {
+            c.enabled = false;
+        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void ShowMesh() {
         foreach (MeshRenderer m in meshes) {
             m.enabled = true;
+        }
+        foreach (ParticleSystem ps in particleSystems) {
+            ps.Play();
+        }
+        foreach (Collider c in colliders) {
+            c.enabled = true;
         }
     }
     
@@ -52,7 +74,6 @@ public class NPC : MonoBehaviour, IShootable {
     /// when it is close enough to his target, he will find the next node in his path and move to that node.
     /// </summary>
     void Update() {
-        if (!dead) {
             //Timer for first node rotation by npc
             firstTimer -= Time.deltaTime;
             if (firstTimer < 0.0f) {
@@ -67,21 +88,21 @@ public class NPC : MonoBehaviour, IShootable {
             if (Vector3.Distance(target.WorldPos, transform.position) < nearRadius) {
                 target = target.Next;
             }
+        if(dead) {
+            deadTimer -= Time.deltaTime;
+            if (firstDead) {
+                firstDead = false;
+                HideMesh();
+            }
+            if (deadTimer < 0) {
+                deadTimer = 25.0f;
+                hp = 200;
+                ShowMesh();
+                firstDead = true;
+                dead = false;
+            }
+
         }
-        //else {
-        //    deadTimer -= Time.deltaTime;
-        //    if(deadTimer < 0) {
-        //        deadTimer = 5.0f;
-        //        hp = 100;
-        //        ShowMesh();
-        //        firstDead = true;
-        //        dead = false;
-        //    }
-        //    if (firstDead) {
-        //        firstDead = false;
-        //        HideMesh();
-        //    }
-        //}
     }
 
     /// <summary>

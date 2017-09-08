@@ -87,9 +87,16 @@ public class GameManager : MonoBehaviour {
 }
 
 //TODO:
+//come up with a real title
 //menu --> buttons that set time/# of shots then a start button to begin. maybe a default settings button
+//pause game --> exit to main menu --> exit game
 //high score
 //game modes? round times? # of shots
+
+//MENU IDEA: pls real title mate?
+//menu scene, menu canvas with start game, custom game, controls, exit game
+//custom game canvas with multiple buttons for time and for number of shots with a back button and a start button.
+//canvas with controls and a back button
 
 //THINGS I WANT TO CHANGE:
 //player position in editor

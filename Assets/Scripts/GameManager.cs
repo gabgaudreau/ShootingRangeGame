@@ -85,18 +85,13 @@ public class GameManager : MonoBehaviour {
         }
 	}
 }
-//Respawn Idea:
-//Do something where the npc that get killed is never destroyed -> hide mesh -> instantiate body explosion -> wait some delay -> show mesh again
-//this will keep the equal interval between npcs at all times.
 
 //TODO:
-//make enemies die and respawn
 //menu --> buttons that set time/# of shots then a start button to begin. maybe a default settings button
 //high score
 //game modes? round times? # of shots
-//reload/magazine.
 
-//BUGS:
+//THINGS I WANT TO CHANGE:
 //player position in editor
 //movement considers mouse orientation when calculating forward direction.
-//no air strafing
+//air strafing csgo style

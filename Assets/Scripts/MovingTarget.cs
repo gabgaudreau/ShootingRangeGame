@@ -64,7 +64,3 @@ public class MovingTarget : MonoBehaviour  {
             transform.Translate(Vector3.back * Time.deltaTime * speed);
     }     
 }
-
-
-//IDEA:
-//Target despawns when hit and respawns after a short delay? use same technique as wandering npc of hiding mesh to keep proper moving position

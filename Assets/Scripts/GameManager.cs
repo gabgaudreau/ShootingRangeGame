@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     // 0 - 13 - 26
     [SerializeField]
     GameObject npcPrefab;
-    private float playerScore;
+    private float playerScore, roundTimer;
     private int shotCounter, shotsLeft;
     private bool firstSpawn;
     [SerializeField]
@@ -24,6 +24,20 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         if (gm == null)
             gm = this;
+    }
+    
+    /// <summary>
+    /// Start method, initializes variables and locks cursor.
+    /// </summary>
+    void Start () {
+        shotsLeft = PlayerPrefs.GetInt("numShots");
+        roundTimer = PlayerPrefs.GetFloat("roundTime");
+        firstSpawn = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        scoreText.text = string.Format("Score: {0:#}", playerScore);
+        shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
+        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
+        shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
     }
 
     /// <summary>
@@ -55,18 +69,6 @@ public class GameManager : MonoBehaviour {
         shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
     }
 
-    /// <summary>
-    /// Start method, initializes variables and locks cursor.
-    /// </summary>
-    void Start () {
-        shotsLeft = 1000;
-        firstSpawn = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        scoreText.text = string.Format("Score: {0:#}", playerScore);
-        shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
-        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
-        shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
-    }
 
     /// <summary>
     /// Update method, on escape, the cursor is unlocked and this method will spawn the initial wave of target dummies.
@@ -88,17 +90,13 @@ public class GameManager : MonoBehaviour {
 
 //TODO:
 //come up with a real title
-//menu --> buttons that set time/# of shots then a start button to begin. maybe a default settings button
 //pause game --> exit to main menu --> exit game
 //high score
-//game modes? round times? # of shots
-
-//MENU IDEA: pls real title mate?
-//menu scene, menu canvas with start game, custom game, controls, exit game
-//custom game canvas with multiple buttons for time and for number of shots with a back button and a start button.
-//canvas with controls and a back button
+//canvas for round timer in gamescene
 
 //THINGS I WANT TO CHANGE:
+//custom text box or something for custom game settings
+//sensitivity setting??
 //player position in editor
 //movement considers mouse orientation when calculating forward direction.
 //air strafing csgo style

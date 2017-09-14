@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour {
     GameObject npcPrefab;
     private float playerScore, roundTimer;
     private int shotCounter, shotsLeft;
-    private bool firstSpawn;
+    private bool firstSpawn, scoreBoardUp;
     [SerializeField]
     Text scoreText, scorePerShotText, shotCounterText, shotsLeftText;
+    [SerializeField]
+    Canvas scoreBoard;
 
     /// <summary>
     /// Initializes singleton in the event that it is null
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour {
         shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
         scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
         shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
+        scoreBoard.enabled = false;
     }
 
     /// <summary>
@@ -78,6 +81,14 @@ public class GameManager : MonoBehaviour {
             if(Cursor.lockState == CursorLockMode.Locked)
                 Cursor.lockState = CursorLockMode.None;
         }
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            if (!scoreBoard.enabled) {
+                scoreBoard.enabled = true;
+            }
+            else {
+                scoreBoard.enabled = false;
+            }
+        }
         //can this be run in start?? using a bool to only execute once in update. This is the initial spawn of enemies.
         if (firstSpawn) {
             Instantiate(npcPrefab, CircularPath.instance.Nodes[0].WorldPos, Quaternion.identity);
@@ -89,10 +100,10 @@ public class GameManager : MonoBehaviour {
 }
 
 //TODO:
-//come up with a real title
 //pause game --> exit to main menu --> exit game
 //high score
-//canvas for round timer in gamescene
+//canvas for round timer in the GameUI canvas
+//Accuracy % based on how many pts you got versus how much you COULD have gotten --> Into Scoreboard canvas
 
 //THINGS I WANT TO CHANGE:
 //custom text box or something for custom game settings

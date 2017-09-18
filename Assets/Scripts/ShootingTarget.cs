@@ -6,7 +6,7 @@ Project: ShootingRangeGame
 using UnityEngine;
 
 public class ShootingTarget : MonoBehaviour, IShootable {
-    private float hp, middleDMG, middlePlusOneDMG, middlePlusTwoDMG, middlePlusThreeDMG, middlePlusFourDMG, middlePlusFiveDMG, deadTimer;
+    private float hp, maxDMG, middleDMG, middlePlusOneDMG, middlePlusTwoDMG, middlePlusThreeDMG, middlePlusFourDMG, middlePlusFiveDMG, deadTimer;
     private bool dead, first;
     private MeshRenderer[] meshes;
 
@@ -17,7 +17,7 @@ public class ShootingTarget : MonoBehaviour, IShootable {
         first = true;
         deadTimer = 25.0f;
         hp = 200;
-        middleDMG = 100;
+        middleDMG = maxDMG = 100;
         middlePlusOneDMG = 85;
         middlePlusTwoDMG = 65;
         middlePlusThreeDMG = 50;
@@ -70,30 +70,38 @@ public class ShootingTarget : MonoBehaviour, IShootable {
     /// </summary>
     /// <param name="objectHit">name of the object hit.</param>
     public void GotShot(string objectHit) {
+        /*
+        middleDMG = 100;
+        middlePlusOneDMG = 85;
+        middlePlusTwoDMG = 65;
+        middlePlusThreeDMG = 50;
+        middlePlusFourDMG = 30;
+        middlePlusFiveDMG = 15;
+        */
         if (!dead) {
             if (objectHit == "MiddlePlus5") {
                 hp -= middlePlusFiveDMG;
-                GameManager.gm.AddScore(middlePlusFiveDMG);
+                GameManager.gm.AddScore(middlePlusFiveDMG, maxDMG);
             }
             else if (objectHit == "MiddlePlus4") {
                 hp -= middlePlusFourDMG;
-                GameManager.gm.AddScore(middlePlusFourDMG);
+                GameManager.gm.AddScore(middlePlusFourDMG, maxDMG);
             }
             else if (objectHit == "MiddlePlus3") {
                 hp -= middlePlusThreeDMG;
-                GameManager.gm.AddScore(middlePlusThreeDMG);
+                GameManager.gm.AddScore(middlePlusThreeDMG, maxDMG);
             }
             else if (objectHit == "MiddlePlus2") {
                 hp -= middlePlusTwoDMG;
-                GameManager.gm.AddScore(middlePlusTwoDMG);
+                GameManager.gm.AddScore(middlePlusTwoDMG, maxDMG);
             }
             else if (objectHit == "MiddlePlus1") {
                 hp -= middlePlusOneDMG;
-                GameManager.gm.AddScore(middlePlusOneDMG);
+                GameManager.gm.AddScore(middlePlusOneDMG, maxDMG);
             }
             else if (objectHit == "Middle") {
                 hp -= middleDMG;
-                GameManager.gm.AddScore(middleDMG);
+                GameManager.gm.AddScore(middleDMG, maxDMG);
             }
             if (hp <= 0) {
                 dead = true;

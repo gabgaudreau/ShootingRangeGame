@@ -7,7 +7,7 @@ using System;
 using UnityEngine;
 
 public class NPC : MonoBehaviour, IShootable {
-    private float hp, deadTimer, speed, nearRadius, currRotVel, currVel, maxRotAcc, maxRotVel, currAcc, maxFleeVel, firstTimer, eyeDMG, headDMG, coreDMG, bodyDMG;
+    private float hp, deadTimer, speed, nearRadius, currRotVel, currVel, maxRotAcc, maxRotVel, currAcc, maxFleeVel, firstTimer, maxDMG, eyeDMG, headDMG, coreDMG, bodyDMG;
     private CircularPathNode target = null;
     private Vector3 direction;
     private bool firstTarget, dead, firstDead;
@@ -22,7 +22,7 @@ public class NPC : MonoBehaviour, IShootable {
     /// </summary>
     void Start() {
         hp = 200; 
-        eyeDMG = 75;
+        eyeDMG = maxDMG = 75;
         headDMG = coreDMG = 50;
         bodyDMG = 25;
         speed = 0.05f;
@@ -122,19 +122,19 @@ public class NPC : MonoBehaviour, IShootable {
         if (!dead) {
             if (objectHit == "Eye") {
                 hp -= eyeDMG;
-                GameManager.gm.AddScore(eyeDMG);
+                GameManager.gm.AddScore(eyeDMG, maxDMG);
             }
             else if (objectHit == "Head") {
                 hp -= headDMG;
-                GameManager.gm.AddScore(headDMG);
+                GameManager.gm.AddScore(headDMG, maxDMG);
             }
             else if (objectHit == "PowerSourceCore") {
                 hp -= coreDMG;
-                GameManager.gm.AddScore(coreDMG);
+                GameManager.gm.AddScore(coreDMG, maxDMG);
             }
             else { // Body includes everything that isn't eye, head or core.
                 hp -= bodyDMG;
-                GameManager.gm.AddScore(bodyDMG);
+                GameManager.gm.AddScore(bodyDMG, maxDMG);
             }
             if (hp <= 0) { // NPC dies.
                 dead = true;

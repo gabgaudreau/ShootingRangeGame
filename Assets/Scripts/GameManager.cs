@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour {
     // 0 - 13 - 26
     [SerializeField]
     GameObject npcPrefab;
-    private float playerScore, roundTimer;
-    private int shotCounter, shotsLeft;
+    private float playerScore, roundTimer, scoreAccuracyPercent, totalPossibleScore, hitAccuracyPercent;
+    private int shotCounter, shotsLeft, shotsHit;
     private bool firstSpawn, scoreBoardUp;
     [SerializeField]
-    Text scoreText, scorePerShotText, shotCounterText, shotsLeftText;
+    Text scoreText, scorePerShotText, shotCounterText, shotsLeftText, scoreAccuracyText, hitAccuracyText;
     [SerializeField]
-    Canvas scoreBoard;
+    Canvas statsCanvas;
 
     /// <summary>
     /// Initializes singleton in the event that it is null
@@ -27,30 +27,36 @@ public class GameManager : MonoBehaviour {
         if (gm == null)
             gm = this;
     }
-    
+
     /// <summary>
     /// Start method, initializes variables and locks cursor.
     /// </summary>
-    void Start () {
+    void Start() {
         shotsLeft = PlayerPrefs.GetInt("numShots");
         roundTimer = PlayerPrefs.GetFloat("roundTime");
         firstSpawn = true;
         Cursor.lockState = CursorLockMode.Locked;
         scoreText.text = string.Format("Score: {0:#}", playerScore);
         shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
-        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
+        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore);
         shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
-        scoreBoard.enabled = false;
+        scoreAccuracyText.text = string.Format("Score Accuracy: {0:#0.00}", scoreAccuracyPercent + "%");
+        hitAccuracyText.text = string.Format("Hit Accuracy: {0:#0.00}", hitAccuracyPercent + "%");
+        statsCanvas.enabled = false;
     }
 
     /// <summary>
-    /// public method to add score.
+    /// Public method to add score. Also adds up accuracy %.
     /// </summary>
-    /// <param name="x">x is a float value passed it.</param>
-    public void AddScore(float x) {
+    /// <param name="x">score to be added</param>
+    /// <param name="max">Max possible score from that shot</param>
+    public void AddScore(float x, float max) {
+        shotsHit++;
+        totalPossibleScore += max;
         playerScore += x;
+        UpdateAccuracy();
         scoreText.text = string.Format("Score: {0:#}", playerScore);
-        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
+        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#.00}", playerScore / shotCounter);
     }
 
     /// <summary>
@@ -62,31 +68,42 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Update Accuracy every shot taken. Updates stats panel information as well.
+    /// </summary>
+    void UpdateAccuracy() {
+        hitAccuracyPercent = ((float)shotsHit / (float)shotCounter) * 100;
+        scoreAccuracyPercent = (playerScore / totalPossibleScore) * 100;
+        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#.00}", playerScore / shotCounter);
+        scoreAccuracyText.text = string.Format("Score Accuracy: {0:#.00}%", scoreAccuracyPercent);
+        hitAccuracyText.text = string.Format("Hit Accuracy: {0:#.00}%", hitAccuracyPercent);
+    }
+
+    /// <summary>
     /// public method to add to the shotcounter variable. Used with the singleton, updates text info as well.
     /// </summary>
     public void AddShotCounter() {
         shotCounter++;
         shotsLeft--;
         shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
-        scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore / shotCounter);
         shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
+        UpdateAccuracy();
     }
 
 
     /// <summary>
     /// Update method, on escape, the cursor is unlocked and this method will spawn the initial wave of target dummies.
     /// </summary>
-    void Update () {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if(Cursor.lockState == CursorLockMode.Locked)
+            if (Cursor.lockState == CursorLockMode.Locked)
                 Cursor.lockState = CursorLockMode.None;
         }
         if (Input.GetKeyDown(KeyCode.Tab)) {
-            if (!scoreBoard.enabled) {
-                scoreBoard.enabled = true;
+            if (!statsCanvas.enabled) {
+                statsCanvas.enabled = true;
             }
             else {
-                scoreBoard.enabled = false;
+                statsCanvas.enabled = false;
             }
         }
         //can this be run in start?? using a bool to only execute once in update. This is the initial spawn of enemies.
@@ -96,18 +113,19 @@ public class GameManager : MonoBehaviour {
             Instantiate(npcPrefab, CircularPath.instance.Nodes[26].WorldPos, Quaternion.identity);
             firstSpawn = false;
         }
-	}
+    }
 }
 
 //TODO:
 //pause game --> exit to main menu --> exit game
-//high score
+//high score for diff bullets/time modes
 //canvas for round timer in the GameUI canvas
-//Accuracy % based on how many pts you got versus how much you COULD have gotten --> Into Scoreboard canvas
 
 //THINGS I WANT TO CHANGE:
+//crouch/sprint
 //custom text box or something for custom game settings
 //sensitivity setting??
 //player position in editor
 //movement considers mouse orientation when calculating forward direction.
 //air strafing csgo style
+//fix cursor and aim, always goes a bit topleft of where cursor is

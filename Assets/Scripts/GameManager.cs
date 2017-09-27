@@ -5,6 +5,7 @@ Project: ShootingRangeGame
 */
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager gm;
@@ -14,11 +15,11 @@ public class GameManager : MonoBehaviour {
     GameObject npcPrefab;
     private float playerScore, roundTimer, scoreAccuracyPercent, totalPossibleScore, hitAccuracyPercent;
     private int shotCounter, shotsLeft, shotsHit;
-    private bool firstSpawn, scoreBoardUp;
+    private bool firstSpawn, scoreBoardUp, gameIsPaused;
     [SerializeField]
-    Text scoreText, scorePerShotText, shotCounterText, shotsLeftText, scoreAccuracyText, hitAccuracyText;
+    Text scoreText, scorePerShotText, shotCounterText, shotsLeftText, scoreAccuracyText, hitAccuracyText, roundTimeText;
     [SerializeField]
-    Canvas statsCanvas;
+    Canvas statsCanvas, pauseCanvas;
 
     /// <summary>
     /// Initializes singleton in the event that it is null
@@ -40,9 +41,11 @@ public class GameManager : MonoBehaviour {
         shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
         scorePerShotText.text = string.Format("Avg Score per Shot: {0:#0.00}", playerScore);
         shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
-        scoreAccuracyText.text = string.Format("Score Accuracy: {0:#0.00}", scoreAccuracyPercent + "%");
-        hitAccuracyText.text = string.Format("Hit Accuracy: {0:#0.00}", hitAccuracyPercent + "%");
+        scoreAccuracyText.text = string.Format("Score Accuracy: {0:#0.00}%", scoreAccuracyPercent);
+        hitAccuracyText.text = string.Format("Hit Accuracy: {0:#0.00}%", hitAccuracyPercent);
+        roundTimeText.text = string.Format("{0:#0} s", roundTimer);
         statsCanvas.enabled = false;
+        pauseCanvas.enabled = false;
     }
 
     /// <summary>
@@ -89,37 +92,75 @@ public class GameManager : MonoBehaviour {
         UpdateAccuracy();
     }
 
+    /// <summary>
+    /// Returns the game pause status bool.
+    /// </summary>
+    /// <returns>returns a bool, if game is paused or not</returns>
+    public bool IsGamePaused() {
+        return gameIsPaused;
+    }
+
 
     /// <summary>
     /// Update method, on escape, the cursor is unlocked and this method will spawn the initial wave of target dummies.
     /// </summary>
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (Cursor.lockState == CursorLockMode.Locked)
-                Cursor.lockState = CursorLockMode.None;
-        }
-        if (Input.GetKeyDown(KeyCode.Tab)) {
-            if (!statsCanvas.enabled) {
-                statsCanvas.enabled = true;
+        if (!gameIsPaused) {
+            roundTimer -= Time.deltaTime;
+            roundTimeText.text = string.Format("{0:#.0} s", roundTimer);
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                pauseCanvas.enabled = true;
+                gameIsPaused = true;
+                Time.timeScale = 0.0f;
+                if (Cursor.lockState == CursorLockMode.Locked)
+                    Cursor.lockState = CursorLockMode.None;
             }
-            else {
-                statsCanvas.enabled = false;
+            if (Input.GetKeyDown(KeyCode.Tab)) {
+                if (!statsCanvas.enabled) {
+                    statsCanvas.enabled = true;
+                }
+                else {
+                    statsCanvas.enabled = false;
+                }
+            }
+            //can this be run in start?? using a bool to only execute once in update. This is the initial spawn of enemies.
+            if (firstSpawn) {
+                Instantiate(npcPrefab, CircularPath.instance.Nodes[0].WorldPos, Quaternion.identity);
+                Instantiate(npcPrefab, CircularPath.instance.Nodes[13].WorldPos, Quaternion.identity);
+                Instantiate(npcPrefab, CircularPath.instance.Nodes[26].WorldPos, Quaternion.identity);
+                firstSpawn = false;
             }
         }
-        //can this be run in start?? using a bool to only execute once in update. This is the initial spawn of enemies.
-        if (firstSpawn) {
-            Instantiate(npcPrefab, CircularPath.instance.Nodes[0].WorldPos, Quaternion.identity);
-            Instantiate(npcPrefab, CircularPath.instance.Nodes[13].WorldPos, Quaternion.identity);
-            Instantiate(npcPrefab, CircularPath.instance.Nodes[26].WorldPos, Quaternion.identity);
-            firstSpawn = false;
-        }
+    }
+
+    /// <summary>
+    /// Pause menu function to resume game.
+    /// </summary>
+    public void OnClickResume() {
+        pauseCanvas.enabled = false;
+        Time.timeScale = 1.0f;
+        gameIsPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    /// <summary>
+    /// Pause menu function to return to main menu. Saves highscore.
+    /// </summary>
+    public void OnClickBackToMenu() {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
+    /// Pause menu button function to exit game.
+    /// </summary>
+    public void OnClickExit() {
+        Application.Quit();
     }
 }
 
-//TODO:
-//pause game --> exit to main menu --> exit game
-//high score for diff bullets/time modes
-//canvas for round timer in the GameUI canvas
+//TODO
+//Game over? out of bullets or out of time! same scene show scoreboard + back to menu button and exit button
 
 //THINGS I WANT TO CHANGE:
 //crouch/sprint

@@ -38,29 +38,31 @@ public class MovingTarget : MonoBehaviour  {
         randomizationTimer = 5.0f;
         RandomizeDirection();
 	}
-	
+
     /// <summary>
     /// Update method, runs every frame, handles random direction change timer.
     /// checks for when the target needs to start moving the other direction because it reached a side bound.
     /// Handles movement of the moving target based on enum state.
     /// </summary>
-	void Update () {
-        randomizationTimer -= Time.deltaTime;
-        //random direction change timer
-        if(randomizationTimer < 0.0f) {
-            RandomizeDirection();
-            randomizationTimer = 5.0f;
+    void Update() {
+        if (!GameManager.gm.IsGamePaused()) {
+            randomizationTimer -= Time.deltaTime;
+            //random direction change timer
+            if (randomizationTimer < 0.0f) {
+                RandomizeDirection();
+                randomizationTimer = 5.0f;
+            }
+            //checks far left bound
+            if (transform.position.z > farLeft)
+                state = Direction.LEFT;
+            //checks far right bound
+            else if (transform.position.z < farRight)
+                state = Direction.RIGHT;
+            //selects appropriate movement based on state.
+            if (state == Direction.RIGHT)
+                transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            else if (state == Direction.LEFT)
+                transform.Translate(Vector3.back * Time.deltaTime * speed);
         }
-        //checks far left bound
-        if (transform.position.z > farLeft)
-            state = Direction.LEFT;
-        //checks far right bound
-        else if (transform.position.z < farRight)
-            state = Direction.RIGHT;
-        //selects appropriate movement based on state.
-        if (state == Direction.RIGHT) 
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        else if (state == Direction.LEFT)
-            transform.Translate(Vector3.back * Time.deltaTime * speed);
-    }     
+    }   
 }

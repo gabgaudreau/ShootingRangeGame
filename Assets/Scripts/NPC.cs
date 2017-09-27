@@ -77,6 +77,7 @@ public class NPC : MonoBehaviour, IShootable {
     /// This way, the NPCs keep an equal interval between them.
     /// </summary>
     void Update() {
+        if (!GameManager.gm.IsGamePaused()) {
             //Timer for first node rotation by npc
             firstTimer -= Time.deltaTime;
             if (firstTimer < 0.0f) {
@@ -91,20 +92,20 @@ public class NPC : MonoBehaviour, IShootable {
             if (Vector3.Distance(target.WorldPos, transform.position) < nearRadius) {
                 target = target.Next;
             }
-        if(dead) {
-            deadTimer -= Time.deltaTime;
-            if (firstDead) { // Only executes the first frame the NPC is dead
-                firstDead = false;
-                HideMesh();
+            if (dead) {
+                deadTimer -= Time.deltaTime;
+                if (firstDead) { // Only executes the first frame the NPC is dead
+                    firstDead = false;
+                    HideMesh();
+                }
+                if (deadTimer < 0) { // NPC is now alive again
+                    deadTimer = 25.0f;
+                    hp = 200;
+                    ShowMesh();
+                    firstDead = true;
+                    dead = false;
+                }
             }
-            if (deadTimer < 0) { // NPC is now alive again
-                deadTimer = 25.0f;
-                hp = 200;
-                ShowMesh();
-                firstDead = true;
-                dead = false;
-            }
-
         }
     }
 

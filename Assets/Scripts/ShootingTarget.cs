@@ -48,18 +48,20 @@ public class ShootingTarget : MonoBehaviour, IShootable {
     /// Update function, checks wether the target is dead or alive and hides/shows the meshes accordingly, also keeps track of the death timer.
     /// </summary>
     void Update() {
-        if(deadTimer < 0) { //Target is now alive again.
-            dead = false;
-            deadTimer = 25.0f;
-            first = true;
-            hp = 200;
-            Show();
-        }
-        if (dead) { //Target is dead.
-            deadTimer -= Time.deltaTime;
-            if (first) {
-                Hide();
-                first = false;
+        if (!GameManager.gm.IsGamePaused()) {
+            if (deadTimer < 0) { //Target is now alive again.
+                dead = false;
+                deadTimer = 25.0f;
+                first = true;
+                hp = 200;
+                Show();
+            }
+            if (dead) { //Target is dead.
+                deadTimer -= Time.deltaTime;
+                if (first) {
+                    Hide();
+                    first = false;
+                }
             }
         }
     }

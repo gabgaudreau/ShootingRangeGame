@@ -35,44 +35,42 @@ public class PlayerScript : MonoBehaviour {
     /// <summary>
     /// Update function, runs every frame, handles all directional movement as well as jumping and gravity.
     /// </summary>
-    void Update () {
-        //Origin of the ray, center of camera (0.5, 0.5)
-        rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
-        RaycastHit hit;
-        //Sets points to determine the line of the laser to be drawn
-        laserLine.SetPosition(0, shootingPoint.transform.position);
-        if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit)) {
-            laserLine.SetPosition(1, hit.point);
-        }
-        else { //If nothing is hit by the ray, just show the full distance of the ray
-            laserLine.SetPosition(1, rayOrigin + (Camera.main.transform.forward * weaponRange));
-        }
-        laserLine.enabled = true;
-        //Fire Button is here, locks cursor if it is not already locked.
-        if (Input.GetButton("Fire") && fireTimer < 0 && GameManager.gm.GetShotsLeft() > 0) {
-            //Lock the cursor back in the event that it isn't (i.e. used menus)
-            if (Cursor.lockState == CursorLockMode.None) {
-                Cursor.lockState = CursorLockMode.Locked;
+    void Update() {
+        if (!GameManager.gm.IsGamePaused()) {
+            //Origin of the ray, center of camera (0.5, 0.5)
+            rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+            RaycastHit hit;
+            //Sets points to determine the line of the laser to be drawn
+            laserLine.SetPosition(0, shootingPoint.transform.position);
+            if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit)) {
+                laserLine.SetPosition(1, hit.point);
             }
-            GameManager.gm.AddShotCounter();
-            Instantiate(bullet, shootingPoint.transform.position, Camera.main.transform.rotation);
-            gunSound.Play();
-            fireTimer = fireRate;
-        }
+            else { //If nothing is hit by the ray, just show the full distance of the ray
+                laserLine.SetPosition(1, rayOrigin + (Camera.main.transform.forward * weaponRange));
+            }
+            laserLine.enabled = true;
+            //Fire Button is here, locks cursor if it is not already locked.
+            if (Input.GetButton("Fire") && fireTimer < 0 && GameManager.gm.GetShotsLeft() > 0) {
+                GameManager.gm.AddShotCounter();
+                Instantiate(bullet, shootingPoint.transform.position, Camera.main.transform.rotation);
+                gunSound.Play();
+                fireTimer = fireRate;
+            }
 
-        //Calculating character movement based on input axis
-        if (CC.isGrounded) {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            //Transforming to world space
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
-            if (Input.GetButton("Jump")) {
-                moveDirection.y = jumpSpeed;
+            //Calculating character movement based on input axis
+            if (CC.isGrounded) {
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                //Transforming to world space
+                moveDirection = transform.TransformDirection(moveDirection);
+                moveDirection *= speed;
+                if (Input.GetButton("Jump")) {
+                    moveDirection.y = jumpSpeed;
+                }
             }
+            //Gravity
+            moveDirection.y -= gravitySpeed * Time.deltaTime;
+            CC.Move(moveDirection * Time.deltaTime);
+            fireTimer -= Time.deltaTime;
         }
-        //Gravity
-        moveDirection.y -= gravitySpeed * Time.deltaTime;
-        CC.Move(moveDirection * Time.deltaTime);
-        fireTimer -= Time.deltaTime;
     }
 }

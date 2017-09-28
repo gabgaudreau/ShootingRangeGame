@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour {
     private int shotCounter, shotsLeft, shotsHit;
     private bool firstSpawn, scoreBoardUp, gameIsPaused;
     [SerializeField]
-    Text scoreText, scorePerShotText, shotCounterText, shotsLeftText, scoreAccuracyText, hitAccuracyText, roundTimeText;
+    Text scoreText, scorePerShotText, shotCounterText, shotsLeftText, scoreAccuracyText, hitAccuracyText, roundTimeText, canvasTitleText;
     [SerializeField]
-    Canvas statsCanvas, pauseCanvas;
+    Canvas statsCanvas, pauseCanvas, gameOverCanvas;
 
     /// <summary>
     /// Initializes singleton in the event that it is null
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
         roundTimeText.text = string.Format("{0:#0} s", roundTimer);
         statsCanvas.enabled = false;
         pauseCanvas.enabled = false;
+        gameOverCanvas.enabled = false;
     }
 
     /// <summary>
@@ -87,6 +88,9 @@ public class GameManager : MonoBehaviour {
     public void AddShotCounter() {
         shotCounter++;
         shotsLeft--;
+        if(shotsLeft <= 0) {
+            GameOver("Out of Bullets!");
+        }
         shotCounterText.text = string.Format("Shot Counter: {0:#}", shotCounter);
         shotsLeftText.text = string.Format("AMMO: {0:#}", shotsLeft);
         UpdateAccuracy();
@@ -100,6 +104,16 @@ public class GameManager : MonoBehaviour {
         return gameIsPaused;
     }
 
+    /// <summary>
+    /// This method will be executed with the round timer runs out or the player has no more bullets.
+    /// </summary>
+    void GameOver(string s) {
+        canvasTitleText.text = s;
+        statsCanvas.enabled = true;
+        gameOverCanvas.enabled = true;
+        gameIsPaused = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     /// <summary>
     /// Update method, on escape, the cursor is unlocked and this method will spawn the initial wave of target dummies.
@@ -107,6 +121,9 @@ public class GameManager : MonoBehaviour {
     void Update() {
         if (!gameIsPaused) {
             roundTimer -= Time.deltaTime;
+            if(roundTimer <= 0.0f) {
+                GameOver("Out of Time!");
+            }
             roundTimeText.text = string.Format("{0:#.0} s", roundTimer);
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 pauseCanvas.enabled = true;
@@ -160,7 +177,7 @@ public class GameManager : MonoBehaviour {
 }
 
 //TODO
-//Game over? out of bullets or out of time! same scene show scoreboard + back to menu button and exit button
+//canvas in menu to show all time best of each stat regardless of mode: score/avg score per shot/score accuracy/hit accuracy
 
 //THINGS I WANT TO CHANGE:
 //crouch/sprint

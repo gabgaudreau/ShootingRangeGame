@@ -51,6 +51,8 @@ public class PlayerScript : MonoBehaviour {
             laserLine.enabled = true;
             //Fire Button is here, locks cursor if it is not already locked.
             if (Input.GetButton("Fire") && fireTimer < 0 && GameManager.gm.GetShotsLeft() > 0) {
+                if (Cursor.lockState == CursorLockMode.None)
+                    Cursor.lockState = CursorLockMode.Locked;
                 GameManager.gm.AddShotCounter();
                 Instantiate(bullet, shootingPoint.transform.position, Camera.main.transform.rotation);
                 gunSound.Play();

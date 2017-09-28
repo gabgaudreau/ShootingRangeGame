@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
     GameObject npcPrefab;
     private float playerScore, roundTimer, scoreAccuracyPercent, totalPossibleScore, hitAccuracyPercent;
     private int shotCounter, shotsLeft, shotsHit;
-    private bool firstSpawn, scoreBoardUp, gameIsPaused;
+    private bool firstSpawn, scoreBoardUp, gameIsPaused, gameOver;
     [SerializeField]
     Text scoreText, scorePerShotText, shotCounterText, shotsLeftText, scoreAccuracyText, hitAccuracyText, roundTimeText, canvasTitleText;
     [SerializeField]
@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour {
     /// This method will be executed with the round timer runs out or the player has no more bullets.
     /// </summary>
     void GameOver(string s) {
+        gameOver = true;
         canvasTitleText.text = s;
         statsCanvas.enabled = true;
         gameOverCanvas.enabled = true;
@@ -161,9 +162,25 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    void UpdateHighScores() {
+        if (playerScore > PlayerPrefs.GetFloat("highScore"))
+            PlayerPrefs.SetFloat("highScore", playerScore);
+        if (hitAccuracyPercent > PlayerPrefs.GetFloat("highestHitAccuracy"))
+            PlayerPrefs.SetFloat("highestHitAccuracy", hitAccuracyPercent);
+        if (scoreAccuracyPercent > PlayerPrefs.GetFloat("highestScoreAccuracy"))
+            PlayerPrefs.SetFloat("highestScoreAccuracy", scoreAccuracyPercent);
+        if (playerScore / shotCounter > PlayerPrefs.GetFloat("highScorePerShot"))
+            PlayerPrefs.SetFloat("highScorePerShot", playerScore / shotCounter);
+    }
+
+    /// <summary>
     /// Pause menu function to return to main menu. Saves highscore.
     /// </summary>
     public void OnClickBackToMenu() {
+        if(gameOver)
+            UpdateHighScores();
         Time.timeScale = 1.0f;
         SceneManager.LoadScene(0);
     }
@@ -172,6 +189,8 @@ public class GameManager : MonoBehaviour {
     /// Pause menu button function to exit game.
     /// </summary>
     public void OnClickExit() {
+        if(gameOver)
+            UpdateHighScores();
         Application.Quit();
     }
 }

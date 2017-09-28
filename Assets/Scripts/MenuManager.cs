@@ -4,12 +4,14 @@ Author: Gabriel Gaudreau
 Project: ShootingRangeGame
 */
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
-
     [SerializeField]
-    Canvas menuCanvas, controlsCanvas, customCanvas;
+    Text highScoreText, hitAccuracyText, scoreAccuracyText, scorePerShotText;
+    [SerializeField]
+    Canvas menuCanvas, controlsCanvas, customCanvas, highScoresCanvas;
 
     /// <summary>
     /// Start method, will set canvases to their respective state, enabled or disabled as well as create playerprefs values.
@@ -19,7 +21,20 @@ public class MenuManager : MonoBehaviour {
         PlayerPrefs.SetInt("numShots", 100);
         controlsCanvas.enabled = false;
         customCanvas.enabled = false;
-	}
+        highScoresCanvas.enabled = false;
+        if (!PlayerPrefs.HasKey("highScore"))
+            PlayerPrefs.SetFloat("highScore", 0.0f);
+        if (!PlayerPrefs.HasKey("highestHitAccuracy"))
+            PlayerPrefs.SetFloat("highestHitAccuracy", 0.0f);
+        if (!PlayerPrefs.HasKey("highestScoreAccuracy"))
+            PlayerPrefs.SetFloat("highestScoreAccuracy", 0.0f);
+        if (!PlayerPrefs.HasKey("highScorePerShot"))
+            PlayerPrefs.SetFloat("highScorePerShot", 0.0f);
+        highScoreText.text = string.Format("Highest Score: {0:#0}", PlayerPrefs.GetFloat("highScore"));
+        hitAccuracyText.text = string.Format("Highest Hit Accuracy: {0:#0.00}%", PlayerPrefs.GetFloat("highestHitAccuracy"));
+        scoreAccuracyText.text = string.Format("Highest Score Accuracy: {0:#0.00}%", PlayerPrefs.GetFloat("highestScoreAccuracy"));
+        scorePerShotText.text = string.Format("Highest Score Per Shot: {0:#0.00}", PlayerPrefs.GetFloat("highScorePerShot"));
+    }
 
     /// <summary>
     /// Starts the game, changes to game scene.
@@ -45,6 +60,14 @@ public class MenuManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Goes to High scores canvas.
+    /// </summary>
+    public void OnClickGoToHighScores() {
+        menuCanvas.enabled = false;
+        highScoresCanvas.enabled = true;
+    }
+
+    /// <summary>
     /// Exits game.
     /// </summary>
     public void OnClickExit() {
@@ -59,6 +82,8 @@ public class MenuManager : MonoBehaviour {
             controlsCanvas.enabled = false;
         else if (customCanvas.enabled)
             customCanvas.enabled = false;
+        else if (highScoresCanvas.enabled)
+            highScoresCanvas.enabled = false;
         menuCanvas.enabled = true;
     }
 

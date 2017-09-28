@@ -25,13 +25,13 @@ public class NPC : MonoBehaviour, IShootable {
         eyeDMG = maxDMG = 75;
         headDMG = coreDMG = 50;
         bodyDMG = 25;
-        speed = 0.05f;
+        speed = 0.2f;
         nearRadius = 0.5f;
         maxRotVel = 1.5f;
         currAcc = 1f;
         maxFleeVel = 2.0f;
         maxRotAcc = 0.01f;
-        firstTimer = 1.0f;
+        firstTimer = 1.5f;
         firstTarget = true;
         firstDead = true;
         deadTimer = 25.0f;
@@ -76,7 +76,7 @@ public class NPC : MonoBehaviour, IShootable {
     /// Also handles what the NPC does while it is dead. Keeps moving, but hides meshes and disables colliders.
     /// This way, the NPCs keep an equal interval between them.
     /// </summary>
-    void Update() {
+    void FixedUpdate() {
         if (!GameManager.gm.IsGamePaused()) {
             //Timer for first node rotation by npc
             firstTimer -= Time.deltaTime;

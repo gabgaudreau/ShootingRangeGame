@@ -1,5 +1,5 @@
 ﻿/**
-File Created May 11th 2017 - File name = Training_Manager.cs
+File Created May 11th 2017 - File name = GameManager.cs
 Author: Gabriel Gaudreau
 Project: ShootingRangeGame
 */
@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// 
+    /// Will update all the highscores upon exiting or going to main menu once the game has ended.
     /// </summary>
     void UpdateHighScores() {
         if (playerScore > PlayerPrefs.GetFloat("highScore"))
@@ -194,9 +194,6 @@ public class GameManager : MonoBehaviour {
         Application.Quit();
     }
 }
-
-//TODO
-//canvas in menu to show all time best of each stat regardless of mode: score/avg score per shot/score accuracy/hit accuracy
 
 //THINGS I WANT TO CHANGE:
 //crouch/sprint

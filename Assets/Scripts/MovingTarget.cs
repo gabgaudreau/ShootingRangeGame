@@ -1,5 +1,5 @@
 ﻿/**
-File Created May 12th 2017 - File name = ShootingRangeMovingTarget.cs
+File Created May 12th 2017 - File name = MovingTarget.cs
 Author: Gabriel Gaudreau
 Project: ShootingRangeGame
 */
